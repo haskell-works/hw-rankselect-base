@@ -2,7 +2,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE StandaloneDeriving         #-}
 
-module HaskellWorks.Data.RankSelect.Binary.Basic.Rank1
+module HaskellWorks.Data.RankSelect.Base.Rank1
     ( Rank1(..)
     ) where
 

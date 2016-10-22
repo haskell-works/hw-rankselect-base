@@ -1,7 +1,7 @@
 {-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
-module HaskellWorks.Data.RankSelect.Binary.Basic.Rank0Spec
+module HaskellWorks.Data.RankSelect.Base.Rank0Spec
   ( genRank0UpTo8Spec
   , genRank0UpTo16Spec
   , spec
@@ -16,8 +16,8 @@ import           HaskellWorks.Data.Bits.BitRead
 import           HaskellWorks.Data.Bits.BitWise
 import           HaskellWorks.Data.Bits.PopCount.PopCount0
 import           HaskellWorks.Data.Positioning
-import           HaskellWorks.Data.RankSelect.Binary.Basic.Rank0
-import           HaskellWorks.Data.RankSelect.Binary.Basic.Select0
+import           HaskellWorks.Data.RankSelect.Base.Rank0
+import           HaskellWorks.Data.RankSelect.Base.Select0
 import           Test.Hspec
 import           Test.QuickCheck
 

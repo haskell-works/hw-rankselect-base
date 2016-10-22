@@ -2,20 +2,20 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE StandaloneDeriving         #-}
 
-module HaskellWorks.Data.RankSelect.Binary.Basic.Rank0
+module HaskellWorks.Data.RankSelect.Base.Rank0
     ( Rank0(..)
     ) where
 
-import qualified Data.Vector                                              as DV
-import qualified Data.Vector.Storable                                     as DVS
+import qualified Data.Vector                                as DV
+import qualified Data.Vector.Storable                       as DVS
 import           Data.Word
 import           HaskellWorks.Data.AtIndex
 import           HaskellWorks.Data.Bits.BitShown
 import           HaskellWorks.Data.Bits.ElemFixedBitSize
 import           HaskellWorks.Data.Bits.PopCount.PopCount0
 import           HaskellWorks.Data.Positioning
-import           HaskellWorks.Data.RankSelect.Binary.Basic.Rank1 as X
-import           Prelude                                                  as P
+import           HaskellWorks.Data.RankSelect.Base.Rank1    as X
+import           Prelude                                    as P
 
 {-# ANN module ("HLint: Ignore Reduce duplication"  :: String) #-}
 

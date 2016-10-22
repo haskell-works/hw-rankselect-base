@@ -15,13 +15,13 @@ cabal-version:          >= 1.22
 
 library
   hs-source-dirs:       src
-  exposed-modules:      HaskellWorks.Data.RankSelect.Binary
-                      , HaskellWorks.Data.RankSelect.Binary.Basic
-                      , HaskellWorks.Data.RankSelect.Binary.Basic.Rank0
-                      , HaskellWorks.Data.RankSelect.Binary.Basic.Rank1
-                      , HaskellWorks.Data.RankSelect.Binary.Basic.Select0
-                      , HaskellWorks.Data.RankSelect.Binary.Basic.Select1
-                      , HaskellWorks.Data.RankSelect.Internal
+  exposed-modules:      HaskellWorks.Data.RankSelect.Base
+                      , HaskellWorks.Data.RankSelect.Base.Rank
+                      , HaskellWorks.Data.RankSelect.Base.Rank0
+                      , HaskellWorks.Data.RankSelect.Base.Rank1
+                      , HaskellWorks.Data.RankSelect.Base.Select
+                      , HaskellWorks.Data.RankSelect.Base.Select0
+                      , HaskellWorks.Data.RankSelect.Base.Select1
   build-depends:        base                          >= 4          && < 5
                       , hw-bits                       >= 0.3.0.0
                       , hw-prim                       >= 0.3.0.5
@@ -36,10 +36,10 @@ test-suite hw-rankselect-base-test
   type:                 exitcode-stdio-1.0
   hs-source-dirs:       test
   main-is:              Spec.hs
-  other-modules:        HaskellWorks.Data.RankSelect.Binary.Basic.Rank0Spec
-                      , HaskellWorks.Data.RankSelect.Binary.Basic.Rank1Spec
-                      , HaskellWorks.Data.RankSelect.Binary.Basic.Select0Spec
-                      , HaskellWorks.Data.RankSelect.Binary.Basic.Select1Spec
+  other-modules:        HaskellWorks.Data.RankSelect.Base.Rank0Spec
+                      , HaskellWorks.Data.RankSelect.Base.Rank1Spec
+                      , HaskellWorks.Data.RankSelect.Base.Select0Spec
+                      , HaskellWorks.Data.RankSelect.Base.Select1Spec
 
   build-depends:        base                          >= 4          && < 5
                       , hspec
