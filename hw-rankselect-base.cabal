@@ -1,9 +1,9 @@
 name:                   hw-rankselect-base
 version:                0.1.0.0
-synopsis:               Rank Select library
+synopsis:               Rank-select base
 description:            Please see README.md
 homepage:               http://github.com/haskell-works/hw-rankselect-base#readme
-license:                MIT
+license:                BSD3
 license-file:           LICENSE
 author:                 John Ky
 maintainer:             newhoggy@gmail.com
