@@ -14,7 +14,7 @@ import           HaskellWorks.Data.Bits.BitShown
 import           HaskellWorks.Data.Bits.BitWise
 import           HaskellWorks.Data.Bits.ElemFixedBitSize
 import           HaskellWorks.Data.Bits.PopCount.PopCount1
-import           HaskellWorks.Data.Narrow
+import           HaskellWorks.Data.Int.Narrow
 import           HaskellWorks.Data.Positioning
 import           Prelude                                   as P
 

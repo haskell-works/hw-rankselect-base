@@ -24,7 +24,8 @@ library
                       , HaskellWorks.Data.RankSelect.Base.Select1
   build-depends:        base                          >= 4          && < 5
                       , hw-bits                       >= 0.3.0.0
-                      , hw-prim                       >= 0.3.0.5
+                      , hw-int                        >= 0.0.0.1
+                      , hw-prim                       >= 0.4.0.0
                       , hw-string-parse               >= 0.0.0.2
                       , safe
                       , vector
@@ -44,7 +45,7 @@ test-suite hw-rankselect-base-test
   build-depends:        base                          >= 4          && < 5
                       , hspec
                       , hw-bits                       >= 0.3.0.0
-                      , hw-prim                       >= 0.3.0.5
+                      , hw-prim                       >= 0.4.0.0
                       , hw-rankselect-base
                       , QuickCheck
                       , vector
@@ -64,6 +65,6 @@ benchmark bench
     Build-Depends:      base                          >= 4          && < 5
                       , criterion
                       , hw-bits                       >= 0.3.0.0
-                      , hw-prim                       >= 0.3.0.5
+                      , hw-prim                       >= 0.4.0.0
                       , hw-rankselect-base
                       , vector

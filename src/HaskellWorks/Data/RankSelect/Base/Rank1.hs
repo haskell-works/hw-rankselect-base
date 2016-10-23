@@ -14,8 +14,8 @@ import           HaskellWorks.Data.Bits.BitShown
 import           HaskellWorks.Data.Bits.BitWise
 import           HaskellWorks.Data.Bits.ElemFixedBitSize
 import           HaskellWorks.Data.Bits.PopCount.PopCount1
+import           HaskellWorks.Data.Int.Widen.Widen64
 import           HaskellWorks.Data.Positioning
-import           HaskellWorks.Data.Widen.Widen64
 import           Prelude                                   as P
 
 {-# ANN module ("HLint: Ignore Reduce duplication"  :: String) #-}
