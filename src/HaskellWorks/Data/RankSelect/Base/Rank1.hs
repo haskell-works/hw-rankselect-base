@@ -6,17 +6,17 @@ module HaskellWorks.Data.RankSelect.Base.Rank1
     ( Rank1(..)
     ) where
 
-import qualified Data.Vector                               as DV
-import qualified Data.Vector.Storable                      as DVS
-import           Data.Word
-import           HaskellWorks.Data.AtIndex
-import           HaskellWorks.Data.Bits.BitShown
-import           HaskellWorks.Data.Bits.BitWise
-import           HaskellWorks.Data.Bits.ElemFixedBitSize
-import           HaskellWorks.Data.Bits.PopCount.PopCount1
-import           HaskellWorks.Data.Int.Widen.Widen64
-import           HaskellWorks.Data.Positioning
-import           Prelude                                   as P
+import Data.Word
+import HaskellWorks.Data.AtIndex
+import HaskellWorks.Data.Bits.BitShown
+import HaskellWorks.Data.Bits.BitWise
+import HaskellWorks.Data.Bits.ElemFixedBitSize
+import HaskellWorks.Data.Bits.PopCount.PopCount1
+import HaskellWorks.Data.Positioning
+import Prelude                                   as P
+
+import qualified Data.Vector          as DV
+import qualified Data.Vector.Storable as DVS
 
 {-# ANN module ("HLint: Ignore Reduce duplication"  :: String) #-}
 
@@ -26,60 +26,28 @@ class Rank1 v where
 deriving instance Rank1 a => Rank1 (BitShown a)
 
 instance Rank1 Word8 where
-  rank1 _ 0  = 0
-  rank1 v s0 =
-    -- Shift out bits after given position.
-    let r0 = v .<. (8 - s0) in
-    -- Count set bits in parallel.
-    let r1 = (r0 .&. 0x55) + ((r0 .>. 1) .&. 0x55)  in
-    let r2 = (r1 .&. 0x33) + ((r1 .>. 2) .&. 0x33)  in
-    let r3 = (r2 .&. 0x0f) + ((r2 .>. 4) .&. 0x0f)  in
-    let r4 = r3 `mod` 255                           in
-    widen64 r4
+  rank1 _ 0 = 0
+  rank1 v i = popCount1 (v .&. ((1 .<. fromIntegral i) - 1))
   {-# INLINABLE rank1 #-}
 
 instance Rank1 Word16 where
-  rank1 _ 0  = 0
-  rank1 v s0 =
-    -- Shift out bits after given position.
-    let r0 = v .<. (16 - s0) in
-    -- Count set bits in parallel.
-    let r1 = (r0 .&. 0x5555) + ((r0 .>. 1) .&. 0x5555)  in
-    let r2 = (r1 .&. 0x3333) + ((r1 .>. 2) .&. 0x3333)  in
-    let r3 = (r2 .&. 0x0f0f) + ((r2 .>. 4) .&. 0x0f0f)  in
-    let r4 = r3 `mod` 255                               in
-    widen64 r4
+  rank1 _ 0 = 0
+  rank1 v i = popCount1 (v .&. ((1 .<. fromIntegral i) - 1))
   {-# INLINABLE rank1 #-}
 
 instance Rank1 Word32 where
-  rank1 _ 0  = 0
-  rank1 v s0 =
-    -- Shift out bits after given position.
-    let r0 = v .<. (32 - s0) in
-    -- Count set bits in parallel.
-    let r1 = (r0 .&. 0x55555555) + ((r0 .>. 1) .&. 0x55555555)  in
-    let r2 = (r1 .&. 0x33333333) + ((r1 .>. 2) .&. 0x33333333)  in
-    let r3 = (r2 .&. 0x0f0f0f0f) + ((r2 .>. 4) .&. 0x0f0f0f0f)  in
-    let r4 = r3 `mod` 255                                       in
-    widen64 r4
+  rank1 _ 0 = 0
+  rank1 v i = popCount1 (v .&. ((1 .<. fromIntegral i) - 1))
   {-# INLINABLE rank1 #-}
 
 instance Rank1 Word64 where
-  rank1 _ 0  = 0
-  rank1 v s0 =
-    -- Shift out bits after given position.
-    let r0 = v .<. (64 - s0) in
-    -- Count set bits in parallel.
-    let r1 = (r0 .&. 0x5555555555555555) + ((r0 .>. 1) .&. 0x5555555555555555)  in
-    let r2 = (r1 .&. 0x3333333333333333) + ((r1 .>. 2) .&. 0x3333333333333333)  in
-    let r3 = (r2 .&. 0x0f0f0f0f0f0f0f0f) + ((r2 .>. 4) .&. 0x0f0f0f0f0f0f0f0f)  in
-    let r4 = r3 `mod` 255                                                       in
-    r4
+  rank1 _ 0 = 0
+  rank1 v i = popCount1 (v .&. ((1 .<. fromIntegral i) - 1))
   {-# INLINABLE rank1 #-}
 
 instance Rank1 [Bool] where
   rank1 = go 0
-    where go r _ 0 = r
+    where go r _ 0          = r
           go r (True :bs) p = go (r + 1) bs (p - 1)
           go r (False:bs) p = go  r      bs (p - 1)
           go _ [] _         = error "Out of range"
