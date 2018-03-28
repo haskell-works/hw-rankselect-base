@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/project
     docker:
-      - image: quay.io/haskell_works/stack-build-cabal
+      - image: quay.io/haskell_works/stack-build-cabal:2018-01-29
 
     steps:
       - checkout
