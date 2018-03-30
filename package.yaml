@@ -24,6 +24,7 @@ library:
   - -msse4.2
   exposed-modules:
   - HaskellWorks.Data.RankSelect.Base
+  - HaskellWorks.Data.RankSelect.Base.Internal
   - HaskellWorks.Data.RankSelect.Base.Rank
   - HaskellWorks.Data.RankSelect.Base.Rank0
   - HaskellWorks.Data.RankSelect.Base.Rank1
