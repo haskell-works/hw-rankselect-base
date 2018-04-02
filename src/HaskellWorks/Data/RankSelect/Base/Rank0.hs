@@ -6,16 +6,17 @@ module HaskellWorks.Data.RankSelect.Base.Rank0
     ( Rank0(..)
     ) where
 
-import qualified Data.Vector                                as DV
-import qualified Data.Vector.Storable                       as DVS
-import           Data.Word
-import           HaskellWorks.Data.AtIndex
-import           HaskellWorks.Data.Bits.BitShown
-import           HaskellWorks.Data.Bits.ElemFixedBitSize
-import           HaskellWorks.Data.Bits.PopCount.PopCount0
-import           HaskellWorks.Data.Positioning
-import           HaskellWorks.Data.RankSelect.Base.Rank1    as X
-import           Prelude                                    as P
+import Data.Word
+import HaskellWorks.Data.AtIndex
+import HaskellWorks.Data.Bits.BitShown
+import HaskellWorks.Data.Bits.ElemFixedBitSize
+import HaskellWorks.Data.Bits.PopCount.PopCount0
+import HaskellWorks.Data.Positioning
+import HaskellWorks.Data.RankSelect.Base.Rank1   as X
+import Prelude                                   as P
+
+import qualified Data.Vector          as DV
+import qualified Data.Vector.Storable as DVS
 
 {-# ANN module ("HLint: Ignore Reduce duplication"  :: String) #-}
 
@@ -42,7 +43,7 @@ instance Rank0 Word64 where
 
 instance Rank0 [Bool] where
   rank0 = go 0
-    where go r _ 0 = r
+    where go r _ 0          = r
           go r (False:bs) p = go (r + 1) bs (p - 1)
           go r (True:bs) p  = go  r      bs (p - 1)
           go _ [] _         = error "Out of range"

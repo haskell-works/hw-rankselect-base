@@ -1,10 +1,9 @@
-resolver: lts-10.1
+resolver: nightly-2018-03-30
 
 packages:
 - '.'
 
-extra-deps:
-  - hedgehog-0.5
+extra-deps: []
 
 flags: {}
 

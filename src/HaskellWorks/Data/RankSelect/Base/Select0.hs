@@ -6,16 +6,17 @@ module HaskellWorks.Data.RankSelect.Base.Select0
     ( Select0(..)
     ) where
 
-import qualified Data.Vector                                as DV
-import qualified Data.Vector.Storable                       as DVS
-import           Data.Word
-import           HaskellWorks.Data.AtIndex
-import           HaskellWorks.Data.Bits.BitShown
-import           HaskellWorks.Data.Bits.BitWise
-import           HaskellWorks.Data.Bits.ElemFixedBitSize
-import           HaskellWorks.Data.Bits.PopCount.PopCount0
-import           HaskellWorks.Data.Positioning
-import           HaskellWorks.Data.RankSelect.Base.Select1
+import Data.Word
+import HaskellWorks.Data.AtIndex
+import HaskellWorks.Data.Bits.BitShown
+import HaskellWorks.Data.Bits.BitWise
+import HaskellWorks.Data.Bits.ElemFixedBitSize
+import HaskellWorks.Data.Bits.PopCount.PopCount0
+import HaskellWorks.Data.Positioning
+import HaskellWorks.Data.RankSelect.Base.Select1
+
+import qualified Data.Vector          as DV
+import qualified Data.Vector.Storable as DVS
 
 {-# ANN module ("HLint: ignore Reduce duplication"  :: String) #-}
 
@@ -43,7 +44,7 @@ instance Select0 Word64 where
 
 instance Select0 [Bool] where
   select0 = go 0
-    where go r _ 0 = r
+    where go r _ 0          = r
           go r (False:bs) c = go (r + 1) bs (c - 1)
           go r (True:bs)  c = go (r + 1) bs  c
           go _ []         _ = error "Out of range"
@@ -56,7 +57,7 @@ instance Select0 [Word8] where
           go u d acc = let w = head u in
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
-              pc            -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
+              pc -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
   {-# INLINABLE select0 #-}
 
 instance Select0 [Word16] where
@@ -66,7 +67,7 @@ instance Select0 [Word16] where
           go u d acc = let w = head u in
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
-              pc            -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
+              pc -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
   {-# INLINABLE select0 #-}
 
 instance Select0 [Word32] where
@@ -76,7 +77,7 @@ instance Select0 [Word32] where
           go u d acc = let w = head u in
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
-              pc            -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
+              pc -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
   {-# INLINABLE select0 #-}
 
 instance Select0 [Word64] where
@@ -86,7 +87,7 @@ instance Select0 [Word64] where
           go u d acc = let w = head u in
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
-              pc            -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
+              pc -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DV.Vector Word8) where
@@ -95,7 +96,7 @@ instance Select0 (DV.Vector Word8) where
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
-              pc            -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DV.Vector Word16) where
@@ -104,7 +105,7 @@ instance Select0 (DV.Vector Word16) where
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
-              pc            -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DV.Vector Word32) where
@@ -113,7 +114,7 @@ instance Select0 (DV.Vector Word32) where
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
-              pc            -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DV.Vector Word64) where
@@ -122,7 +123,7 @@ instance Select0 (DV.Vector Word64) where
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
-              pc            -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DVS.Vector Word8) where
@@ -131,7 +132,7 @@ instance Select0 (DVS.Vector Word8) where
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
-              pc            -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DVS.Vector Word16) where
@@ -140,7 +141,7 @@ instance Select0 (DVS.Vector Word16) where
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
-              pc            -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DVS.Vector Word32) where
@@ -149,7 +150,7 @@ instance Select0 (DVS.Vector Word32) where
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
-              pc            -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DVS.Vector Word64) where
@@ -158,5 +159,5 @@ instance Select0 (DVS.Vector Word64) where
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
-              pc            -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}

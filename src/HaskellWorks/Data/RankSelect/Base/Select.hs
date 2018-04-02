@@ -6,9 +6,9 @@ module HaskellWorks.Data.RankSelect.Base.Select
       Select(..)
     ) where
 
-import           HaskellWorks.Data.Positioning
-import           HaskellWorks.Data.RankSelect.Base.Select0
-import           HaskellWorks.Data.RankSelect.Base.Select1
+import HaskellWorks.Data.Positioning
+import HaskellWorks.Data.RankSelect.Base.Select0
+import HaskellWorks.Data.RankSelect.Base.Select1
 
 class Eq a => Select v a where
   select :: a -> v -> Count -> Count

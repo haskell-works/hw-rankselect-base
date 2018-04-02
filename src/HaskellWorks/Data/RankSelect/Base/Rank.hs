@@ -2,13 +2,13 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 
 module HaskellWorks.Data.RankSelect.Base.Rank
-    ( -- * Rank & Select
-      Rank(..)
-    ) where
+  ( -- * Rank & Select
+    Rank(..)
+  ) where
 
-import           HaskellWorks.Data.Positioning
-import           HaskellWorks.Data.RankSelect.Base.Rank0
-import           HaskellWorks.Data.RankSelect.Base.Rank1
+import HaskellWorks.Data.Positioning
+import HaskellWorks.Data.RankSelect.Base.Rank0
+import HaskellWorks.Data.RankSelect.Base.Rank1
 
 class Eq a => Rank v a where
   rank :: a -> v -> Count -> Count

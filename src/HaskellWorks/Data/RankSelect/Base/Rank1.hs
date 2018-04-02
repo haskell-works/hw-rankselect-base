@@ -13,7 +13,6 @@ import HaskellWorks.Data.Bits.BitWise
 import HaskellWorks.Data.Bits.ElemFixedBitSize
 import HaskellWorks.Data.Bits.PopCount.PopCount1
 import HaskellWorks.Data.Positioning
-import Prelude                                   as P
 
 import qualified Data.Vector          as DV
 import qualified Data.Vector.Storable as DVS

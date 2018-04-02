@@ -10,8 +10,8 @@ module HaskellWorks.Data.RankSelect.Base.Select1Spec
 
 import           Data.Maybe
 import           Data.Typeable
-import qualified Data.Vector                                                as DV
-import qualified Data.Vector.Storable                                       as DVS
+import qualified Data.Vector                               as DV
+import qualified Data.Vector.Storable                      as DVS
 import           Data.Word
 import           HaskellWorks.Data.Bits.BitRead
 import           HaskellWorks.Data.Bits.BitWise

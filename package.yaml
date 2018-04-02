@@ -14,6 +14,7 @@ extra-source-files:
 ghc-options: -Wall
 dependencies:
 - base >=4 && <5
+- bits-extra
 - hw-bits >=0.4.0.0
 - hw-prim >=0.4.0.0
 - vector
@@ -44,9 +45,12 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - hspec
-    - hw-rankselect-base
     - QuickCheck
+    - hedgehog
+    - hspec
+    - hw-hedgehog
+    - hw-hspec-hedgehog
+    - hw-rankselect-base
 benchmarks:
   bench:
     main: Main.hs
@@ -57,3 +61,17 @@ benchmarks:
     dependencies:
     - criterion
     - hw-rankselect-base
+
+when:
+- condition: (flag(bmi2)) && (impl(ghc >=8.4.1))
+  ghc-options:
+  - -mbmi2
+  - -msse4.2
+  cpp-options:
+  - -DBMI2_ENABLED
+
+flags:
+  bmi2:
+    description: Enable bmi2 instruction set
+    manual: false
+    default: false
