@@ -12,17 +12,17 @@ import Test.Hspec
 import qualified Hedgehog.Gen   as G
 import qualified Hedgehog.Range as R
 
-{-# ANN module ("HLint: ignore Redundant do" :: String) #-}
+{-# ANN module ("HLint: ignore Redundant do"        :: String) #-}
 {-# ANN module ("HLint: ignore Reduce duplication"  :: String) #-}
 
 spec :: Spec
 spec = describe "HaskellWorks.Data.RankSelect.Base.InternalSpec" $ do
   describe "Bmi2 and broadword implementations match" $ do
-    it "64-bit" $ require $ property $ do
+    it "64-bit" $ requireProperty $ do
       s <- forAll $ mfilter (/= 0) (G.word64 R.constantBounded)
       r <- forAll $ G.word64 (R.linear 0 (fromIntegral (popCount s)))
       select1Word64Broadword s r === select1Word64Bmi2 s r
-    it "32-bit" $ require $ property $ do
+    it "32-bit" $ requireProperty $ do
       s <- forAll $ mfilter (/= 0) (G.word32 R.constantBounded)
       r <- forAll $ G.word64 (R.linear 0 (fromIntegral (popCount s)))
       select1Word32Broadword s r === select1Word32Bmi2 s r
