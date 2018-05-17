@@ -44,6 +44,12 @@ instance Rank1 Word64 where
   rank1 v i = popCount1 (v .&. ((1 .<. fromIntegral i) - 1))
   {-# INLINABLE rank1 #-}
 
+instance Rank1 Bool where
+  rank1 True  0 = 0
+  rank1 True  1 = 1
+  rank1 False 0 = 0
+  rank1 False 1 = 0
+
 instance Rank1 [Bool] where
   rank1 = go 0
     where go r _ 0          = r

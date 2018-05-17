@@ -75,9 +75,7 @@ instance Select1 Word64 where
   {-# INLINE select1 #-}
 
 instance Select1 Bool where
-  select1 b c = if c == 1
-    then if b then 1 else 0
-    else 0
+  select1 b c = if c == 1 && b then 1 else 0
 
 instance Select1 (DVS.Vector Word8) where
   select1 v c = go 0 c 0
