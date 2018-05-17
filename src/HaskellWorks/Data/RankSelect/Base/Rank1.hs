@@ -6,6 +6,7 @@ module HaskellWorks.Data.RankSelect.Base.Rank1
     ( Rank1(..)
     ) where
 
+import Data.Bits.BitSize
 import Data.Word
 import HaskellWorks.Data.AtIndex
 import HaskellWorks.Data.Bits.BitShown
@@ -49,41 +50,15 @@ instance Rank1 Bool where
   rank1 True  1 = 1
   rank1 False 0 = 0
   rank1 False 1 = 0
+  rank1 _     _ = error "Invalid position for rank1"
 
-instance Rank1 [Bool] where
+instance (PopCount1 w, Rank1 w, BitSize w) => Rank1 [w] where
   rank1 = go 0
-    where go r _ 0          = r
-          go r (True :bs) p = go (r + 1) bs (p - 1)
-          go r (False:bs) p = go  r      bs (p - 1)
-          go _ [] _         = error "Out of range"
-  {-# INLINABLE rank1 #-}
+    where go c (w:ws) p = if p <= bitCount w
+            then c + rank1 w p
+            else go (c + popCount1 w) ws (p - bitCount w)
+          go c [] _ = c
 
-instance Rank1 [Word8] where
-  rank1 v p = popCount1 prefix + if r == 0 then 0 else (`rank1` r) maybeElem
-    where (q, r)    = if p < 1 then (0, 0) else ((p - 1) `quot` elemFixedBitSize v, ((p - 1) `rem` elemFixedBitSize v) + 1)
-          prefix    = take (fromIntegral q) v
-          maybeElem = v !! fromIntegral q
-  {-# INLINABLE rank1 #-}
-
-instance Rank1 [Word16] where
-  rank1 v p = popCount1 prefix + if r == 0 then 0 else (`rank1` r) maybeElem
-    where (q, r)    = if p < 1 then (0, 0) else ((p - 1) `quot` elemFixedBitSize v, ((p - 1) `rem` elemFixedBitSize v) + 1)
-          prefix    = take (fromIntegral q) v
-          maybeElem = v !! fromIntegral q
-  {-# INLINABLE rank1 #-}
-
-instance Rank1 [Word32] where
-  rank1 v p = popCount1 prefix + if r == 0 then 0 else (`rank1` r) maybeElem
-    where (q, r)    = if p < 1 then (0, 0) else ((p - 1) `quot` elemFixedBitSize v, ((p - 1) `rem` elemFixedBitSize v) + 1)
-          prefix    = take (fromIntegral q) v
-          maybeElem = v !! fromIntegral q
-  {-# INLINABLE rank1 #-}
-
-instance Rank1 [Word64] where
-  rank1 v p = popCount1 prefix + if r == 0 then 0 else (`rank1` r) maybeElem
-    where (q, r)    = if p < 1 then (0, 0) else ((p - 1) `quot` elemFixedBitSize v, ((p - 1) `rem` elemFixedBitSize v) + 1)
-          prefix    = take (fromIntegral q) v
-          maybeElem = v !! fromIntegral q
   {-# INLINABLE rank1 #-}
 
 instance Rank1 (DV.Vector Word8) where
