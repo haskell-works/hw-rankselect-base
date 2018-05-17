@@ -1,11 +1,13 @@
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
 {-# LANGUAGE StandaloneDeriving         #-}
 
 module HaskellWorks.Data.RankSelect.Base.Select1
     ( Select1(..)
     ) where
 
+import Data.Bits.BitSize
 import Data.Word
 import HaskellWorks.Data.AtIndex
 import HaskellWorks.Data.Bits.BitShown
@@ -72,53 +74,10 @@ instance Select1 Word64 where
   select1 = select1Word64
   {-# INLINE select1 #-}
 
-instance Select1 [Bool] where
-  select1 = go 0
-    where go r _ 0          = r
-          go r (True :bs) c = go (r + 1) bs (c - 1)
-          go r (False:bs) c = go (r + 1) bs  c
-          go _ []         _ = error "Out of range"
-  {-# INLINE select1 #-}
-
-instance Select1 [Word8] where
-  select1 v c = go v c 0
-    where go :: [Word8] -> Count -> Count -> Count
-          go _ 0  acc = acc
-          go u d acc = let w = head u in
-            case popCount1 w of
-              pc | d <= pc  -> select1 w d + acc
-              pc -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
-  {-# INLINE select1 #-}
-
-instance Select1 [Word16] where
-  select1 v c = go v c 0
-    where go :: [Word16] -> Count -> Count -> Count
-          go _ 0  acc = acc
-          go u d acc = let w = head u in
-            case popCount1 w of
-              pc | d <= pc  -> select1 w d + acc
-              pc -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
-  {-# INLINE select1 #-}
-
-instance Select1 [Word32] where
-  select1 v c = go v c 0
-    where go :: [Word32] -> Count -> Count -> Count
-          go _ 0  acc = acc
-          go u d acc = let w = head u in
-            case popCount1 w of
-              pc | d <= pc  -> select1 w d + acc
-              pc -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
-  {-# INLINE select1 #-}
-
-instance Select1 [Word64] where
-  select1 v c = go v c 0
-    where go :: [Word64] -> Count -> Count -> Count
-          go _ 0  acc = acc
-          go u d acc = let w = head u in
-            case popCount1 w of
-              pc | d <= pc  -> select1 w d + acc
-              pc -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
-  {-# INLINE select1 #-}
+instance Select1 Bool where
+  select1 b c = if c == 1
+    then if b then 1 else 0
+    else 0
 
 instance Select1 (DVS.Vector Word8) where
   select1 v c = go 0 c 0
@@ -190,4 +149,15 @@ instance Select1 (DV.Vector Word64) where
             case popCount1 w of
               pc | d <= pc  -> select1 w d + acc
               pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+  {-# INLINE select1 #-}
+
+instance (PopCount1 w, Select1 w, BitSize w) => Select1 [w] where
+  select1 v c = go v c 0
+    where go _ 0 acc = acc
+          go u d acc = case u of
+            w:ws -> let pc = popCount1 w in
+              if d <= pc
+                then select1 w d + acc
+                else go ws (d - pc) (acc + bitCount w)
+            [] -> acc
   {-# INLINE select1 #-}

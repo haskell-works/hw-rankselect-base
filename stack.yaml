@@ -1,9 +1,11 @@
-resolver: nightly-2018-03-30
+resolver: nightly-2018-05-17
 
 packages:
 - '.'
 
-extra-deps: []
+extra-deps:
+- bits-extra-0.0.1.0
+- hw-prim-0.6.0.0
 
 flags: {}
 
