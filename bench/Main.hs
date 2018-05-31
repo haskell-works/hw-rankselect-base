@@ -4,6 +4,7 @@ module Main where
 
 import Criterion.Main
 import Data.Bits.Pdep
+import Data.Monoid ((<>))
 import Data.Word
 import HaskellWorks.Data.RankSelect.Base
 import HaskellWorks.Data.RankSelect.Base.Internal
