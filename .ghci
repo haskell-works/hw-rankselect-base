@@ -1,0 +1,4 @@
+import Data.Maybe
+import Data.Word
+import HaskellWorks.Data.Bits.BitShow
+import HaskellWorks.Data.Bits.BitRead
