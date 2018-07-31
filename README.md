@@ -30,6 +30,8 @@ types.
 
 ## Examples
 
+Check the convenience imports in the project's `.ghci` file.
+
 Run the repl in convenience script (uses stack).
 
 ```
