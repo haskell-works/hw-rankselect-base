@@ -28,15 +28,32 @@ Moreover additional type class instances are provided for `[]`, `Vector`
 from both `Data.Vector`, and `Data.Vector.Storable` of these primitive
 types.
 
-The collection-based type classes instances are not intended to be used
-in high-performance code because they have poor performance for most
-purposes and are provided purely as reference implementations.
+## Examples
 
-Bit-vectors larger than 64-bits need indexing to achieve higher performance.
-A indexed bit-vector implementation can found in the
-[hw-rankselect](https://hackage.haskell.org/package/hw-rankselect) package.
+Run the repl in convenience script (uses stack).
 
-## Notes
+```
+$ ./run-stack.sh repl
+```
+
+Then create a rank-select bit-string of the desired type:
+
+
+```
+λ> let bs = fromJust $ bitRead "0001001001100001000001000110101000101000" :: Word64
+"00010010 01100001 00000100 01101010 00101000 00000000 00000000 00000000"
+```
+
+Call the rank-select operations on the bit-string
+
+```
+λ> rank1 bs 20
+1
+λ> select1 bs 4
+11
+```
+
+## Vector indexing conventions
 
 This library follows standard 1-based counting conventions typically found in
 Computer Science literature where `select1 10 2 = 4` as illustrated here:
@@ -56,6 +73,30 @@ that is slightly faster when implemented with the `bmi2` instruction set where
   7 6 5 4  [3]2 1 0
   0 0 0 0   1 0 1 0
 ```
+
+## Performance notes
+
+The word-vector-based type classes instances are not intended to be used
+in high-performance code because where random-access on large bit-vectors
+are needed because they have poor performance due to having to do a linear
+scan.
+
+For smaller bit-vectors that fit on one page of memory, they do quite well.
+In fact, the [hw-dsv](https://github.com/haskell-works/hw-dsv) library
+uses them for small vectors.
+
+Bit-vectors larger than say 4096-bits need indexing to achieve reasonable
+random-access performance.
+
+A indexed bit-vector implementation can found in the
+[hw-rankselect](https://hackage.haskell.org/package/hw-rankselect) package.
+
+## Architecture notes
+
+This library has only been tested on little-endian CPU architectures.
+
+Anyone wishing to use this on big-endian CPU architectures will need to
+confirm that this works properly.
 
 ## Compilation
 
