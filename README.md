@@ -90,7 +90,7 @@ uses them for small vectors.
 Bit-vectors larger than say 4096-bits need indexing to achieve reasonable
 random-access performance.
 
-A indexed bit-vector implementation can found in the
+An indexed bit-vector implementation can found in the
 [hw-rankselect](https://hackage.haskell.org/package/hw-rankselect) package.
 
 ## Architecture notes
