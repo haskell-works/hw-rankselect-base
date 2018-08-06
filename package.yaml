@@ -15,11 +15,11 @@ extra-source-files:
 ghc-options: -Wall
 
 dependencies:
-- base >=4.8 && <5
-- bits-extra >=0.0.0.4 && < 0.1
-- hw-bits >=0.7.0.2 && < 0.8
-- hw-prim >=0.5.0.5 && < 0.7
-- vector >= 0.12 && < 0.13
+- base            >= 4.8        && < 5
+- bits-extra      >= 0.0.0.4    && < 0.1
+- hw-bits         >= 0.7.0.2    && < 0.8
+- hw-prim         >= 0.5.0.5    && < 0.7
+- vector          >= 0.12       && < 0.13
 
 library:
   source-dirs: src
@@ -36,8 +36,8 @@ library:
   - HaskellWorks.Data.RankSelect.Base.Select0
   - HaskellWorks.Data.RankSelect.Base.Select1
   dependencies:
-  - hw-int >=0.0.0.1 && < 0.1
-  - hw-string-parse >=0.0.0.2 && < 0.1
+  - hw-int            >= 0.0.0.1    && < 0.1
+  - hw-string-parse   >= 0.0.0.2    && < 0.1
   - safe
 
 tests:
@@ -49,11 +49,11 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - QuickCheck >= 2.10 && < 2.12
-    - hedgehog >= 0.5 && < 0.7
-    - hspec >= 2.2 && < 2.6
-    - hw-hedgehog >= 0.1 && < 0.2
-    - hw-hspec-hedgehog >= 0.1 && < 0.2
+    - QuickCheck          >= 2.10       && < 2.12
+    - hedgehog            >= 0.5        && < 0.7
+    - hspec               >= 2.2        && < 2.6
+    - hw-hedgehog         >= 0.1        && < 0.2
+    - hw-hspec-hedgehog   >= 0.1        && < 0.2
     - hw-rankselect-base
     verbatim:
       build-tool-depends: hspec-discover:hspec-discover
@@ -66,7 +66,7 @@ benchmarks:
     - -O2
     - -msse4.2
     dependencies:
-    - criterion >= 1.2 && < 1.5
+    - criterion           >= 1.2        && < 1.6
     - hw-rankselect-base
 
 when:
