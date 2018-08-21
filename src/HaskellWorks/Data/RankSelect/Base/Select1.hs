@@ -148,14 +148,3 @@ instance Select1 (DV.Vector Word64) where
               pc | d <= pc  -> select1 w d + acc
               pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINE select1 #-}
-
-instance (PopCount1 w, Select1 w, BitSize w) => Select1 [w] where
-  select1 v c = go v c 0
-    where go _ 0 acc = acc
-          go u d acc = case u of
-            w:ws -> let pc = popCount1 w in
-              if d <= pc
-                then select1 w d + acc
-                else go ws (d - pc) (acc + bitCount w)
-            [] -> acc
-  {-# INLINE select1 #-}
