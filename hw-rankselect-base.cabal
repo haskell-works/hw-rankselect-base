@@ -32,7 +32,7 @@ common QuickCheck                     { build-depends: QuickCheck               
 common bits-extra                     { build-depends: bits-extra                     >= 0.0.0.4    && < 0.1    }
 common criterion                      { build-depends: criterion                      >= 1.2        && < 1.6    }
 common hedgehog                       { build-depends: hedgehog                       >= 0.6        && < 1.1    }
-common hspec                          { build-depends: hspec                          >= 2.2        && < 2.6    }
+common hspec                          { build-depends: hspec                          >= 2.2        && < 3      }
 common hw-bits                        { build-depends: hw-bits                        >= 0.7.0.2    && < 0.8    }
 common hw-hedgehog                    { build-depends: hw-hedgehog                    >= 0.1        && < 0.2    }
 common hw-hspec-hedgehog              { build-depends: hw-hspec-hedgehog              >= 0.1        && < 0.2    }
