@@ -23,16 +23,16 @@ select1Word64Bmi2Base0 w r = fromIntegral (countTrailingZeros (pdep (1 .<. r) w)
 
 select1Word64Bmi2 :: Word64 -> Word64 -> Word64
 select1Word64Bmi2 w r =
-  let zeros = countTrailingZeros (pdep (1 .<. (r - 1)) w) :: Int
+  let zeros = countTrailingZeros (pdep (1 .<. ((r - 1) .&. 0x7f)) w) :: Int
       mask  = fromIntegral ((fromIntegral (zeros .<. 57) :: Int64) `shiftR` 63) :: Word64
   in (fromIntegral zeros .|. mask) + 1
 {-# INLINE select1Word64Bmi2 #-}
 
 select1Word32Bmi2 :: Word32 -> Word64 -> Word64
 select1Word32Bmi2 w r =
-  let zeros = countTrailingZeros (pdep (1 .<. (r - 1)) w) :: Int
+  let zeros = countTrailingZeros (pdep (1 .<. ((r - 1) .&. 0x7f)) w) :: Int
       mask  = fromIntegral ((fromIntegral (zeros .<. 58) :: Int64) `shiftR` 63) :: Word64
-  in (fromIntegral zeros .|. mask) + 1
+          in (fromIntegral zeros .|. mask) + 1
 {-# INLINE select1Word32Bmi2 #-}
 
 select1Word64Broadword :: Word64 -> Word64 -> Word64
