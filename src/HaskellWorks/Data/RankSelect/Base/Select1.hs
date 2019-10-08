@@ -7,7 +7,6 @@ module HaskellWorks.Data.RankSelect.Base.Select1
     ( Select1(..)
     ) where
 
-import Data.Bits.BitSize
 import Data.Word
 import HaskellWorks.Data.AtIndex
 import HaskellWorks.Data.Bits.BitShown
@@ -82,8 +81,8 @@ instance Select1 (DVS.Vector Word8) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount1 w of
-              pc | d <= pc  -> select1 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select1 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINE select1 #-}
 
 instance Select1 (DVS.Vector Word16) where
@@ -91,8 +90,8 @@ instance Select1 (DVS.Vector Word16) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount1 w of
-              pc | d <= pc  -> select1 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select1 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINE select1 #-}
 
 instance Select1 (DVS.Vector Word32) where
@@ -100,8 +99,8 @@ instance Select1 (DVS.Vector Word32) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount1 w of
-              pc | d <= pc  -> select1 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select1 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINE select1 #-}
 
 instance Select1 (DVS.Vector Word64) where
@@ -109,8 +108,8 @@ instance Select1 (DVS.Vector Word64) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount1 w of
-              pc | d <= pc  -> select1 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select1 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINE select1 #-}
 
 instance Select1 (DV.Vector Word8) where
@@ -118,8 +117,8 @@ instance Select1 (DV.Vector Word8) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount1 w of
-              pc | d <= pc  -> select1 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select1 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINE select1 #-}
 
 instance Select1 (DV.Vector Word16) where
@@ -127,8 +126,8 @@ instance Select1 (DV.Vector Word16) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount1 w of
-              pc | d <= pc  -> select1 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select1 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINE select1 #-}
 
 instance Select1 (DV.Vector Word32) where
@@ -136,8 +135,8 @@ instance Select1 (DV.Vector Word32) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount1 w of
-              pc | d <= pc  -> select1 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select1 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINE select1 #-}
 
 instance Select1 (DV.Vector Word64) where
@@ -145,6 +144,6 @@ instance Select1 (DV.Vector Word64) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount1 w of
-              pc | d <= pc  -> select1 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select1 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINE select1 #-}
