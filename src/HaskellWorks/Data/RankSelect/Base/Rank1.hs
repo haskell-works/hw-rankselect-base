@@ -6,6 +6,7 @@ module HaskellWorks.Data.RankSelect.Base.Rank1
     ( Rank1(..)
     ) where
 
+import Data.Bits.BitSize
 import Data.Word
 import HaskellWorks.Data.AtIndex
 import HaskellWorks.Data.Bits.BitShown
@@ -50,6 +51,15 @@ instance Rank1 Bool where
   rank1 False 0 = 0
   rank1 False 1 = 0
   rank1 _     _ = error "Invalid position for rank1"
+
+instance (PopCount1 w, Rank1 w, BitSize w) => Rank1 [w] where
+  rank1 = go 0
+    where go c (w:ws) p = if p <= bitCount w
+            then c + rank1 w p
+            else go (c + popCount1 w) ws (p - bitCount w)
+          go c [] _ = c
+
+  {-# INLINABLE rank1 #-}
 
 instance Rank1 (DV.Vector Word8) where
   rank1 v p = popCount1 prefix + if r == 0 then 0 else (`rank1` r) maybeElem
