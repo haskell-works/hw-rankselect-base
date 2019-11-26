@@ -15,8 +15,11 @@ import HaskellWorks.Data.Bits.PopCount.PopCount0
 import HaskellWorks.Data.Positioning
 import HaskellWorks.Data.RankSelect.Base.Select1
 
+import qualified Data.Bit             as Bit
+import qualified Data.Bit.ThreadSafe  as BitTS
 import qualified Data.Vector          as DV
 import qualified Data.Vector.Storable as DVS
+import qualified Data.Vector.Unboxed  as DVU
 
 {-# ANN module ("HLint: ignore Reduce duplication"  :: String) #-}
 
@@ -160,4 +163,14 @@ instance Select0 (DVS.Vector Word64) where
             case popCount0 w of
               pc | d <= pc  -> select0 w d + acc
               pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+  {-# INLINABLE select0 #-}
+
+instance Select0 (DVU.Vector Bit.Bit) where
+  select0 _ 0 = 0
+  select0 v p = fromIntegral $ maybe (DVU.length v) (+ 1) $ Bit.nthBitIndex (Bit.Bit False) (fromIntegral p) v
+  {-# INLINABLE select0 #-}
+
+instance Select0 (DVU.Vector BitTS.Bit) where
+  select0 _ 0 = 0
+  select0 v p = fromIntegral $ maybe (DVU.length v) (+ 1) $ BitTS.nthBitIndex (BitTS.Bit False) (fromIntegral p) v
   {-# INLINABLE select0 #-}

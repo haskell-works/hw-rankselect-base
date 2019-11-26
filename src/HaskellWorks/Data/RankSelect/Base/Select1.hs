@@ -19,8 +19,11 @@ import HaskellWorks.Data.Positioning
 import HaskellWorks.Data.RankSelect.Base.Internal
 import Prelude
 
+import qualified Data.Bit             as Bit
+import qualified Data.Bit.ThreadSafe  as BitTS
 import qualified Data.Vector          as DV
 import qualified Data.Vector.Storable as DVS
+import qualified Data.Vector.Unboxed  as DVU
 
 class Select1 v where
   select1 :: v -> Count -> Count
@@ -158,4 +161,14 @@ instance (PopCount1 w, Select1 w, BitSize w) => Select1 [w] where
                 then select1 w d + acc
                 else go ws (d - pc) (acc + bitCount w)
             [] -> acc
+  {-# INLINE select1 #-}
+
+instance Select1 (DVU.Vector Bit.Bit) where
+  select1 _ 0 = 0
+  select1 v p = fromIntegral $ maybe (DVU.length v) (+ 1) $ Bit.nthBitIndex (Bit.Bit True) (fromIntegral p) v
+  {-# INLINE select1 #-}
+
+instance Select1 (DVU.Vector BitTS.Bit) where
+  select1 _ 0 = 0
+  select1 v p = fromIntegral $ maybe (DVU.length v) (+ 1) $ BitTS.nthBitIndex (BitTS.Bit True) (fromIntegral p) v
   {-# INLINE select1 #-}
