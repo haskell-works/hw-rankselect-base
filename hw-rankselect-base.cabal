@@ -73,6 +73,7 @@ test-suite hw-rankselect-base-test
   import:               base, config
                       , QuickCheck
                       , bits-extra
+                      , bitvec
                       , hedgehog
                       , hspec
                       , hw-bits
