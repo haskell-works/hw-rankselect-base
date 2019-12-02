@@ -57,8 +57,10 @@ library
                       , vector
   exposed-modules:      HaskellWorks.Data.RankSelect.Base
                         HaskellWorks.Data.RankSelect.Base.Internal
+                        HaskellWorks.Data.RankSelect.Base.Rank
                         HaskellWorks.Data.RankSelect.Base.Rank0
                         HaskellWorks.Data.RankSelect.Base.Rank1
+                        HaskellWorks.Data.RankSelect.Base.Select
                         HaskellWorks.Data.RankSelect.Base.Select0
                         HaskellWorks.Data.RankSelect.Base.Select1
   other-modules:        Paths_hw_rankselect_base
