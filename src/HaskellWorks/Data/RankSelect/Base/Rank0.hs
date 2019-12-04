@@ -15,8 +15,11 @@ import HaskellWorks.Data.Positioning
 import HaskellWorks.Data.RankSelect.Base.Rank1   as X
 import Prelude                                   as P
 
+import qualified Data.Bit             as Bit
+import qualified Data.Bit.ThreadSafe  as BitTS
 import qualified Data.Vector          as DV
 import qualified Data.Vector.Storable as DVS
+import qualified Data.Vector.Unboxed  as DVU
 
 {-# ANN module ("HLint: Ignore Reduce duplication"  :: String) #-}
 
@@ -131,4 +134,12 @@ instance Rank0 (DVS.Vector Word64) where
     where (q, r)    = if p < 1 then (0, 0) else ((p - 1) `quot` elemFixedBitSize v, ((p - 1) `rem` elemFixedBitSize v) + 1)
           prefix    = DVS.take (fromIntegral q) v
           maybeElem = v !!! fromIntegral q
+  {-# INLINE rank0 #-}
+
+instance Rank0 (DVU.Vector Bit.Bit) where
+  rank0 v p = p - rank1 v p
+  {-# INLINE rank0 #-}
+
+instance Rank0 (DVU.Vector BitTS.Bit) where
+  rank0 v p = p - rank1 v p
   {-# INLINE rank0 #-}

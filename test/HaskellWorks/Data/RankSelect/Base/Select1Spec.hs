@@ -21,8 +21,11 @@ import HaskellWorks.Hspec.Hedgehog
 import Hedgehog
 import Test.Hspec
 
+import qualified Data.Bit             as Bit
+import qualified Data.Bit.ThreadSafe  as BitTS
 import qualified Data.Vector          as DV
 import qualified Data.Vector.Storable as DVS
+import qualified Data.Vector.Unboxed  as DVU
 import qualified Hedgehog.Gen         as G
 import qualified Hedgehog.Range       as R
 
@@ -91,6 +94,12 @@ spec = describe "HaskellWorks.Data.RankSelect.InternalSpec" $ do
   genSelect1UpTo8Spec  (undefined :: DVS.Vector Word64)
   genSelect1UpTo16Spec (undefined :: DVS.Vector Word64)
   genSelect1UpTo32Spec (undefined :: DVS.Vector Word64)
+  genSelect1UpTo8Spec  (undefined :: DVU.Vector Bit.Bit)
+  genSelect1UpTo16Spec (undefined :: DVU.Vector Bit.Bit)
+  genSelect1UpTo32Spec (undefined :: DVU.Vector Bit.Bit)
+  genSelect1UpTo8Spec  (undefined :: DVU.Vector BitTS.Bit)
+  genSelect1UpTo16Spec (undefined :: DVU.Vector BitTS.Bit)
+  genSelect1UpTo32Spec (undefined :: DVU.Vector BitTS.Bit)
   describe "For Word64" $ do
     it "rank1 for Word16 and Word64 should give same answer for bits 0-7" $ requireProperty $ do
       i <- forAll $ G.word64 (R.linear 0 8)
