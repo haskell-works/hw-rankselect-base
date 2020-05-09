@@ -21,7 +21,7 @@ import qualified Data.Vector          as DV
 import qualified Data.Vector.Storable as DVS
 import qualified Data.Vector.Unboxed  as DVU
 
-{-# ANN module ("HLint: ignore Reduce duplication"  :: String) #-}
+{- HLINT ignore "Reduce duplication"  -}
 
 class Select0 v where
   select0 :: v -> Count -> Count
@@ -59,8 +59,8 @@ instance Select0 [Word8] where
           go _ 0  acc = acc
           go u d acc = let w = head u in
             case popCount0 w of
-              pc | d <= pc  -> select0 w d + acc
-              pc -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
+              pc | d <= pc -> select0 w d + acc
+              pc           -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
   {-# INLINABLE select0 #-}
 
 instance Select0 [Word16] where
@@ -69,8 +69,8 @@ instance Select0 [Word16] where
           go _ 0  acc = acc
           go u d acc = let w = head u in
             case popCount0 w of
-              pc | d <= pc  -> select0 w d + acc
-              pc -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
+              pc | d <= pc -> select0 w d + acc
+              pc           -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
   {-# INLINABLE select0 #-}
 
 instance Select0 [Word32] where
@@ -79,8 +79,8 @@ instance Select0 [Word32] where
           go _ 0  acc = acc
           go u d acc = let w = head u in
             case popCount0 w of
-              pc | d <= pc  -> select0 w d + acc
-              pc -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
+              pc | d <= pc -> select0 w d + acc
+              pc           -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
   {-# INLINABLE select0 #-}
 
 instance Select0 [Word64] where
@@ -89,8 +89,8 @@ instance Select0 [Word64] where
           go _ 0  acc = acc
           go u d acc = let w = head u in
             case popCount0 w of
-              pc | d <= pc  -> select0 w d + acc
-              pc -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
+              pc | d <= pc -> select0 w d + acc
+              pc           -> go (tail u) (d - pc) (acc + elemFixedBitSize u)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DV.Vector Word8) where
@@ -98,8 +98,8 @@ instance Select0 (DV.Vector Word8) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
-              pc | d <= pc  -> select0 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select0 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DV.Vector Word16) where
@@ -107,8 +107,8 @@ instance Select0 (DV.Vector Word16) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
-              pc | d <= pc  -> select0 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select0 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DV.Vector Word32) where
@@ -116,8 +116,8 @@ instance Select0 (DV.Vector Word32) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
-              pc | d <= pc  -> select0 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select0 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DV.Vector Word64) where
@@ -125,8 +125,8 @@ instance Select0 (DV.Vector Word64) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
-              pc | d <= pc  -> select0 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select0 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DVS.Vector Word8) where
@@ -134,8 +134,8 @@ instance Select0 (DVS.Vector Word8) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
-              pc | d <= pc  -> select0 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select0 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DVS.Vector Word16) where
@@ -143,8 +143,8 @@ instance Select0 (DVS.Vector Word16) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
-              pc | d <= pc  -> select0 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select0 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DVS.Vector Word32) where
@@ -152,8 +152,8 @@ instance Select0 (DVS.Vector Word32) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
-              pc | d <= pc  -> select0 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select0 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DVS.Vector Word64) where
@@ -161,8 +161,8 @@ instance Select0 (DVS.Vector Word64) where
     where go _ 0  acc = acc
           go n d acc = let w = (v !!! n) in
             case popCount0 w of
-              pc | d <= pc  -> select0 w d + acc
-              pc -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
+              pc | d <= pc -> select0 w d + acc
+              pc           -> go (n + 1) (d - pc) (acc + elemFixedBitSize v)
   {-# INLINABLE select0 #-}
 
 instance Select0 (DVU.Vector Bit.Bit) where

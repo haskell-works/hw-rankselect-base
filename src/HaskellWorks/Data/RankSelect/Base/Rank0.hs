@@ -21,7 +21,7 @@ import qualified Data.Vector          as DV
 import qualified Data.Vector.Storable as DVS
 import qualified Data.Vector.Unboxed  as DVU
 
-{-# ANN module ("HLint: ignore Reduce duplication"  :: String) #-}
+{- HLINT ignore "Reduce duplication"  -}
 
 class Rank0 v where
   rank0 :: v -> Count -> Count
