@@ -29,8 +29,8 @@ import qualified Data.Vector.Unboxed  as DVU
 import qualified Hedgehog.Gen         as G
 import qualified Hedgehog.Range       as R
 
-{-# ANN module ("HLint: ignore Redundant do"        :: String) #-}
-{-# ANN module ("HLint: ignore Reduce duplication"  :: String) #-}
+{- HLINT ignore "Redundant do"        -}
+{- HLINT ignore "Reduce duplication"  -}
 
 genSelect0UpTo8Spec :: forall s. (Typeable s, BitRead s, Select0 s) => s -> Spec
 genSelect0UpTo8Spec _ = describe ("Generically up to 8 bits for " ++ show (typeOf (undefined :: s))) $ do

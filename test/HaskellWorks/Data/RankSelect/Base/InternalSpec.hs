@@ -12,8 +12,8 @@ import Test.Hspec
 import qualified Hedgehog.Gen   as G
 import qualified Hedgehog.Range as R
 
-{-# ANN module ("HLint: ignore Redundant do"        :: String) #-}
-{-# ANN module ("HLint: ignore Reduce duplication"  :: String) #-}
+{- HLINT ignore "Redundant do"        -}
+{- HLINT ignore "Reduce duplication"  -}
 
 spec :: Spec
 spec = describe "HaskellWorks.Data.RankSelect.Base.InternalSpec" $ do
