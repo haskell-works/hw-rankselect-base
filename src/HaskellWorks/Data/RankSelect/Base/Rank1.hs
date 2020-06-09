@@ -25,6 +25,20 @@ import qualified Data.Vector.Unboxed  as DVU
 
 class Rank1 v where
   -- | Find the number of occurences of the bit @1@ in the prefix of the supplied bitstring of the given length
+  --
+  -- >>> import HaskellWorks.Data.Bits.BitRead
+  -- >>> :set -XTypeApplications
+  --
+  -- >>> rank1 (unsafeBitRead @Word8 "00000000") 4
+  -- 0
+  -- >>> rank1 (unsafeBitRead @Word8 "11000000") 4
+  -- 2
+  -- >>> rank1 (unsafeBitRead @Word8 "01100000") 4
+  -- 2
+  -- >>> rank1 (unsafeBitRead @Word8 "01100110") 4
+  -- 2
+  -- >>> rank1 (unsafeBitRead @Word8 "01100110") 6
+  -- 3
   rank1
     :: v      -- ^ The bitstring
     -> Count  -- ^ The prefix length

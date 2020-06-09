@@ -25,6 +25,22 @@ import qualified Data.Vector.Unboxed  as DVU
 
 class Select0 v where
   -- | Find length of the shortest prefix of the given prefix that contains specified number of occurences of the bit @1@
+  --
+  -- If the bitstring does not have enough occurences of bit @0@ is insufficient to satisfy the query the result is undefined.
+  --
+  -- >>> import HaskellWorks.Data.Bits.BitRead
+  -- >>> :set -XTypeApplications
+  --
+  -- >>> select0 (unsafeBitRead @Word8 "11111111") 0
+  -- 0
+  -- >>> select0 (unsafeBitRead @Word8 "11110111") 1
+  -- 5
+  -- >>> select0 (unsafeBitRead @Word8 "00000000") 4
+  -- 4
+  -- >>> select0 (unsafeBitRead @Word8 "11000000") 4
+  -- 6
+  -- >>> select0 (unsafeBitRead @Word8 "01100000") 4
+  -- 6
   select0
     :: v      -- ^ The bitstring
     -> Count  -- ^ The number of zeros
