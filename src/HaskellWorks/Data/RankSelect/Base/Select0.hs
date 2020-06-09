@@ -24,7 +24,11 @@ import qualified Data.Vector.Unboxed  as DVU
 {- HLINT ignore "Reduce duplication"  -}
 
 class Select0 v where
-  select0 :: v -> Count -> Count
+  -- | Find length of the shortest prefix of the given prefix that contains specified number of occurences of the bit @1@
+  select0
+    :: v      -- ^ The bitstring
+    -> Count  -- ^ The number of zeros
+    -> Count
 
 deriving instance Select0 a => Select0 (BitShown a)
 

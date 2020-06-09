@@ -11,7 +11,12 @@ import HaskellWorks.Data.RankSelect.Base.Rank0
 import HaskellWorks.Data.RankSelect.Base.Rank1
 
 class Eq a => Rank v a where
-  rank :: a -> v -> Count -> Count
+  -- | Find the number of occurences of the given symbol in the prefix of the supplied bitstring of the given length
+  rank
+    :: a      -- ^ The symbol
+    -> v      -- ^ The bitstring
+    -> Count  -- ^ The prefix length
+    -> Count
 
 instance Rank [Bool] Bool where
   rank a = if a then rank1 else rank0

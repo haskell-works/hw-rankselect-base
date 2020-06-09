@@ -24,7 +24,11 @@ import qualified Data.Vector.Unboxed  as DVU
 {- HLINT ignore "Reduce duplication"  -}
 
 class Rank0 v where
-  rank0 :: v -> Count -> Count
+  -- | Find the number of occurences of the bit @0@ in the prefix of the supplied bitstring of the given length
+  rank0
+    :: v      -- ^ The bitstring
+    -> Count  -- ^ The prefix length
+    -> Count
 
 deriving instance Rank0 a => Rank0 (BitShown a)
 

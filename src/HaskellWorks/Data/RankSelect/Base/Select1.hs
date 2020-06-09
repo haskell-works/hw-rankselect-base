@@ -26,7 +26,11 @@ import qualified Data.Vector.Storable as DVS
 import qualified Data.Vector.Unboxed  as DVU
 
 class Select1 v where
-  select1 :: v -> Count -> Count
+  -- | Find length of the shortest prefix of the given prefix that contains specified number of occurences of the bit @1@
+  select1
+    :: v      -- ^ The bitstring
+    -> Count  -- ^ The number of ones
+    -> Count
 
 deriving instance Select1 a => Select1 (BitShown a)
 
