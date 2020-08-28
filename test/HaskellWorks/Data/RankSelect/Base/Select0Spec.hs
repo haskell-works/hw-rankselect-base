@@ -33,13 +33,13 @@ import qualified Hedgehog.Range       as R
 {- HLINT ignore "Reduce duplication"  -}
 
 genSelect0UpTo8Spec :: forall s. (Typeable s, BitRead s, Select0 s) => s -> Spec
-genSelect0UpTo8Spec _ = describe ("Generically up to 8 bits for " ++ show (typeOf (undefined :: s))) $ do
+genSelect0UpTo8Spec _ = describe ("Generically up to 8 bits for " ++ show (typeRep (Proxy :: Proxy s))) $ do
   it "select0 10010010 over [0..5] should be 023568" $ requireProperty $ do
     let bs = fromJust $ bitRead "10010010" :: Word8
     fmap (select0 bs) [0..5] === [0, 2, 3, 5, 6, 8]
 
 genSelect0UpTo16Spec :: forall s. (Typeable s, BitRead s, Select0 s) => s -> Spec
-genSelect0UpTo16Spec _ = describe ("Generically up to 16 bits for " ++ show (typeOf (undefined :: s))) $ do
+genSelect0UpTo16Spec _ = describe ("Generically up to 16 bits for " ++ show (typeRep (Proxy :: Proxy s))) $ do
   it "select0 11011010 00 over [0..5]" $ requireProperty $ do
     let bs = fromJust $ bitRead "1101101 000" :: [Bool]
     fmap (select0 bs) [0..5] === [0, 3, 6, 8, 9, 10]
@@ -48,7 +48,7 @@ genSelect0UpTo16Spec _ = describe ("Generically up to 16 bits for " ++ show (typ
     fmap (select0 bs) [0..11] === [0, 3, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
 genSelect0UpTo32Spec :: forall s. (Typeable s, BitRead s, Select0 s) => s -> Spec
-genSelect0UpTo32Spec _ = describe ("Generically up to 16 bits for " ++ show (typeOf (undefined :: s))) $ do
+genSelect0UpTo32Spec _ = describe ("Generically up to 16 bits for " ++ show (typeRep (Proxy :: Proxy s))) $ do
   it "select0 11000001 10000000 01000000 over [0..5] should be 023568" $ requireProperty $ do
     let bs = fromJust $ bitRead "11000001 10000000 01000000" :: s
     fmap (select0 bs) [0..19] === [0, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22, 23, 24]

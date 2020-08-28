@@ -32,13 +32,13 @@ import qualified Hedgehog.Range       as R
 {- HLINT ignore "Reduce duplication"  -}
 
 genRank0UpTo8Spec :: forall s. (Typeable s, BitRead s, Rank0 s) => s -> Spec
-genRank0UpTo8Spec _ = describe ("Generically up to 8 bits for " ++ show (typeOf (undefined :: s))) $ do
+genRank0UpTo8Spec _ = describe ("Generically up to 8 bits for " ++ show (typeRep (Proxy :: Proxy s))) $ do
   it "rank0 10010010 over [0..8] should be 001223445" $ requireProperty $ do
     let bs = fromJust (bitRead "10010010") :: s
     fmap (rank0 bs) [0..8] === [0, 0, 1, 2, 2, 3, 4, 4, 5]
 
 genRank0UpTo16Spec :: forall s. (Typeable s, BitRead s, Rank0 s) => s -> Spec
-genRank0UpTo16Spec _ = describe ("Generically up to 16 bits for " ++ show (typeOf (undefined :: s))) $ do
+genRank0UpTo16Spec _ = describe ("Generically up to 16 bits for " ++ show (typeRep (Proxy :: Proxy s))) $ do
   it "rank0 11011010 00000000 over [0..16]" $ requireProperty $ do
     let bs = fromJust $ bitRead "11011010 00000000" :: s
     fmap (rank0 bs) [0..16] === [0, 0, 0, 1, 1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
