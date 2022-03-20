@@ -61,12 +61,11 @@ jobs:
       - name: Build
         # Try building it twice in case of flakey builds on Windows
         run: |
-          cabal build all --enable-tests --enable-benchmarks --write-ghc-environment-files=ghc8.4.4+ || \
-          cabal build all --enable-tests --enable-benchmarks --write-ghc-environment-files=ghc8.4.4+ -j1
+          cabal build all --enable-tests --enable-benchmarks
 
       - name: Test
         run: |
-          cabal test all --enable-tests --enable-benchmarks --write-ghc-environment-files=ghc8.4.4+
+          cabal test all --enable-tests --enable-benchmarks
 
   check:
     needs: build
