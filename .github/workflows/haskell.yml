@@ -61,7 +61,7 @@ jobs:
       - name: Build
         # Try building it twice in case of flakey builds on Windows
         run: |
-          cabal build all --enable-tests --enable-benchmarks
+          cabal build all --enable-tests --enable-benchmarks -v3
 
       - name: Test
         run: |
