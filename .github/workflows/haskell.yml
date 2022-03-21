@@ -29,7 +29,7 @@ jobs:
           ghc-version: ${{ matrix.ghc }}
           cabal-version: 3.6.2.0
 
-      - name: Set some window specific things
+      - name: Default build directory
         run: echo "CABAL_BUILDDIR=dist-newstyle" >> $GITHUB_ENV
 
       - name: Set some window specific things
