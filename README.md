@@ -1,6 +1,5 @@
 # hw-rankselect-base
-[![CircleCI](https://circleci.com/gh/haskell-works/hw-rankselect-base.svg?style=svg)](https://circleci.com/gh/haskell-works/hw-rankselect-base)
-[![Travis](https://travis-ci.org/haskell-works/hw-rankselect-base.svg?branch=master)](https://travis-ci.org/haskell-works/hw-rankselect-base)
+[![Binaries](https://github.com/haskell-works/hw-rankselect-base/actions/workflows/haskell.yml/badge.svg)](https://github.com/haskell-works/hw-rankselect-base/actions/workflows/haskell.yml)
 
 Rank and select operations.
 
